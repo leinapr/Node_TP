@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Exercice 1 - Variables and Debugging</title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2487.5">
+  <style type="text/css">
+  </style>
+</head>
+<body>
+  <h1>Exercice 1 : Variables et Debugging</h1>
+  <p id="Exercise1">The goal of this exercise will be to practice basic JavaScript debugging and familiarize with browser Developer Tools.</p>
+
+  <script>
+    // Step 1: Declare a variable 'message'
+    let message = "Hello, this is a message from JavaScript!";
+    console.log(message);
+
+    // Step 2: Check in DevelopperTool that the message is displayed
+    // Press cmd + option + I for Chrome on MacBook
+
+    // Step 3: Test console.log with an array
+    let someComplexVariable = [1, 2, 3];
+    console.log("Log message with an array: ", someComplexVariable);
+
+    // Test console.log with an object
+    let someObject = { field1: "value1", field2: "value2" };
+    console.log("Log message with an object: ", someObject);
+
+    // Step 4: Test a more complex object declaration
+    let var1 = 10;
+    let var2 = 20;
+    let var3 = 30;
+    let var4 = 40;
+
+    console.log("Log message with nested object:", {
+      var1,
+      var2,
+      field3: [var3, { var4 }]
+    });
+
+    // Step 5: Check in DevelopperTool that the message is displayed
+    // Press cmd + option + I for Chrome on MacBook
+
+    // Step 6: From the DevelopperTool sources tab, put a Breakpoint in JavaScript
+  </script>
+
+  <h1>Exercise 2: Modal User Interaction</h1>
+  <p id="Exercise2">This exercise will ask the user to enter a message and display it.</p>
+  <button id="triggerButton">Click to enter text</button>
+
+  <script>
+    document.getElementById("triggerButton").addEventListener("click", function() {
+      // Step 1: Ask the user to type a text using prompt()
+      let enteredText = prompt("Please enter some text:");
+
+      // Step 2: If the user entered some text (not null or empty)
+      if (enteredText !== null && enteredText.trim() !== "") {
+        // Step 3: Ask for confirmation using confirm()
+        let isConfirmed = confirm("Do you confirm your input?");
+
+        // If user confirms, display message in console and with alert
+        if (isConfirmed) {
+          console.log(`You entered: ${enteredText}`);
+          alert(`You entered: ${enteredText}`);
+        } else {
+          console.log("You canceled the confirmation.");
+          alert("You canceled the confirmation.");
+        }
+      } else {
+        console.log("No text entered.");
+        alert("No text entered.");
+      }
+    });
+  </script>
+
+  <h1>Exercise 3: DOM Manipulation</h1>
+  <!-- Step 1: Add an HTML element with a unique ID -->
+  <p id="Exercise3">This exercise will display the current date and time.</p>
+  <p id="dateText">Current date and time will appear here.</p>
+
+  <script>
+    // Step 2: Select the element by its ID
+    const dateElement = document.getElementById("dateText");
+
+    // Step 3: Function to get the current date and time in "yyyy/mm/dd hh:mm:ss" format
+    function getCurrentDateTime() {
+      const now = new Date();
+
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed, so we add 1
+      const day = String(now.getDate()).padStart(2, '0');
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+
+      return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+    }
+
+    // Modify the content of the selected element to display
+    dateElement.textContent = `Current Date and Time: ${getCurrentDateTime()}`;
+  </script>
+
+  <h1>Exercise 4: DOM Manipulation and scheduled periodic timer</h1>
+  <!-- Step 1: Add an HTML element with a unique ID -->
+  <p id="Exercise4">This exercise will display the current date and time and update it every 5 seconds.</p>
+  <p id="dateText2">Current date and time will appear here.</p>
+
+  <script>
+    // Step 2: Select the element by its ID
+    const dateElement2 = document.getElementById("dateText2");
+
+    // Step 3: Update every 5 seconds the date
+    function updateDate() {
+      dateElement2.textContent = `Current Date and Time: ${getCurrentDateTime()}`;
+    }
+    updateDate();
+    setInterval(updateDate, 5000);
+  </script>
+
+  <h1>Exercise 5: Callback Events and Interaction</h1>
+  <button id="triggerButton2">Click to know the current time</button>
+  <p id="lastClick">Current date and time will appear here.</p>
+  <script>
+    const dateElement3 = document.getElementById("lastClick");
+    document.getElementById("triggerButton2").addEventListener("click", function() {
+      dateElement3.textContent = `The button was last clicked at date: ${getCurrentDateTime()} ! `;
+    });
+  </script>
+
+  <h1>Exercise 6: Click, Query DOM, Manipulate Dom</h1>
+  <input id="input" type="text" placeholder="Enter item">
+  <button id="addToList">Add to List</button>
+  <ul id="list">
+    <!-- Items will be appended here -->
+  </ul>
+
+  <script>
+    // Step 1: Add the necessary elements
+    const inputField = document.getElementById('input');
+    const addButton = document.getElementById('addToList');
+    const list = document.getElementById('list');
+
+    // Step 2: Update the list element
+    addButton.addEventListener('click', () => {
+      const inputValue = inputField.value;
+
+      const listItem = document.createElement('li');
+      listItem.textContent = inputValue;
+
+      list.appendChild(listItem);
+
+      inputField.value = '';
+    });
+  </script>
+
+  <h1>Bonus Exercise 7: Dom and Realtime Events</h1>
+  <input id="inputField" type="text" placeholder="Type something here...">
+  <p id="outputText">Your text will appear here...</p>
+
+  <script>
+    // Step 1: Get references to the input field and the paragraph
+    const inputField = document.getElementById('inputField');
+    const outputText = document.getElementById('outputText');
+
+
+    // Step 2: Add an event listener to update the <p> element in real-time
+    inputField.addEventListener('input', function() {
+      outputText.textContent = `${inputField.value}`; // Update the <p> with current value
+    });
+  </script>
+  // Didn't work
+
+  <h1>Bonus Exercise 8: Real-time List Updates</h1>
+  <input id="inputField2" type="text" placeholder="Type something here...">
+  <ul id="list2">
+    <li>Your text will appear here...</li>
+  </ul>
+
+  <script>
+    // Step 1: Get references to the input field and the list
+    const inputField = document.getElementById('inputField2');
+    const list = document.getElementById('list2');
+
+    // Step 2.1: Function to update the last <li> item with the input value
+    inputField.addEventListener('input', function() {
+      const lastLi = list.querySelector('li:last-child');
+      lastLi.textContent = `${inputField.value}`;  // Update the last <li> with current value of input
+    });
+
+    // Step 2.2: Function to add a new <li> item when the Enter key is pressed
+    inputField.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        if (inputField.value.trim() !== "") {
+          const newLi = document.createElement('li');
+          newLi.textContent = `${inputField.value}`;
+
+          list.appendChild(newLi);  // Add new <li> to the list
+
+          inputField.value = '';
+        }
+      }
+    });
+  </script>
+  // Didn't work
+
+</body>
+</html>

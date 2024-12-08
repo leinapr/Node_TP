@@ -1,0 +1,14 @@
+/* For rounded corners */
+.form-control.rounded-pill {
+  border-radius: 50px;
+}
+
+/* Custom styling for the search page */
+.container {
+  max-width: 800px;
+  margin-top: 20px;
+}
+
+button {
+  width: 100%;
+}
